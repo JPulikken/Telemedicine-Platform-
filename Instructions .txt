@@ -1,0 +1,3 @@
+Go to https://www.mongodb.com/products/platform/atlas-database to set up the database
+Run using Node.js
+Purchase ETH tokens using Metamask

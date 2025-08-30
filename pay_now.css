@@ -1,0 +1,233 @@
+/* Import Google Font - Inter (consistent with login/register) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f2f5; /* Light gray background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Stack header, container, footer */
+    min-height: 100vh;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 15px 50px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar h1 {
+    color: #008cba;
+}
+
+.navbar nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.auth-buttons button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.sign-in {
+    background-color: white;
+    border: 1px solid #008cba;
+    color: #008cba;
+}
+
+.register {
+    background-color: #008cba;
+    color: white;
+}
+
+/* Main container for payment content */
+.container {
+    flex-grow: 1; /* Allow container to take remaining vertical space */
+    max-width: 800px;
+    margin: 40px auto; /* More margin top/bottom */
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center content inside container */
+}
+
+.container h2 {
+    color: #2e7d32; /* Green heading */
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+.payment-options {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 30px; /* Space between payment sections */
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.payment-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    flex: 1; /* Allow cards to grow */
+    min-width: 300px; /* Minimum width for each card */
+    max-width: 100%; /* Max width for single column layout for ethereum */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.payment-card h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Ethereum specific styles */
+.ethereum-payment-section {
+    background-color: #e6f7ff; /* Light blue background for Ethereum section */
+    border-color: #91d5ff; /* Blue border */
+}
+
+.status-message {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 15px;
+    width: 80%; /* Make buttons take more width */
+    max-width: 300px; /* Limit button width */
+}
+
+.connect-btn {
+    background: linear-gradient(135deg, #007bff, #0056d2);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.connect-btn:hover {
+    background: linear-gradient(135deg, #0056d2, #0040a0);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+.pay-btn {
+    background: linear-gradient(135deg, #28a745, #1e7e34); /* Green for pay */
+    color: white;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.pay-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #1e7e34, #28a745);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+}
+
+.pay-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.transaction-message {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 10px;
+    word-break: break-all; /* Break long transaction hashes */
+}
+
+.disclaimer {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #fff3cd; /* Light yellow background */
+    border: 1px solid #ffeeba; /* Yellow border */
+    border-radius: 8px;
+    color: #856404; /* Dark yellow text */
+    font-size: 0.85rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.back-to-dashboard-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6c757d; /* Gray color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* For anchor tag */
+}
+
+.back-to-dashboard-btn:hover {
+    background-color: #5a6268;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: auto; /* Push footer to bottom */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+    .navbar nav {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbar nav a {
+        margin: 5px 0;
+    }
+    .auth-buttons {
+        margin-top: 10px;
+    }
+    .container {
+        margin: 20px;
+        padding: 20px;
+    }
+    .payment-options {
+        flex-direction: column; /* Stack cards vertically */
+        gap: 20px;
+    }
+    .payment-card {
+        max-width: 100%; /* Full width for cards on small screens */
+    }
+    .action-btn {
+        width: 100%; /* Full width buttons on mobile */
+        max-width: none;
+    }
+}

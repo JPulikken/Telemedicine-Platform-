@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pay Now - CDS MedEase</title>
+    <link rel="stylesheet" href="index.css"> <link rel="stylesheet" href="pay_now.css"> <script src="https://cdn.ethers.io/lib/ethers-5.7.umd.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1><a href="index.html" class="medease-logo">🏥 CDS MedEase</a></h1>
+            <nav id="main-nav">
+                <a href="index.html">Home</a>
+                <a href="FDoctors.html">Find Doctors</a>
+                <a href="Aboutus.html">About Us</a>
+            </nav>
+            <div class="auth-buttons" id="auth-buttons">
+                </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h2>Secure Payment with Ethereum</h2>
+
+        <div class="payment-options">
+            <div class="ethereum-payment-section payment-card">
+                <h3>Pay with MetaMask</h3>
+                <p class="status-message" id="metaMaskStatus">Connect your MetaMask wallet to proceed.</p>
+                <p class="status-message" id="accountAddress">Account: Not Connected</p>
+                <p class="status-message" id="networkStatus">Network: Not Connected</p>
+                <p class="status-message" id="paymentAmount">Payment Amount: Loading...</p> <button id="connectMetaMaskBtn" class="action-btn connect-btn">Connect MetaMask</button>
+                <button id="payWithEthBtn" class="action-btn pay-btn" disabled>Pay with Ether</button>
+
+                <p class="transaction-message" id="transactionStatus"></p>
+                <p class="transaction-message" id="transactionHash"></p>
+
+                <div class="disclaimer">
+                    <p><strong>Disclaimer:</strong> This is a demonstration for a secure payment method using Ethereum testnet. Do NOT use real Ether for testing. Ensure your MetaMask is connected to a testnet (e.g., Sepolia).</p>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="window.location.href='patient_dashboard.html'" class="back-to-dashboard-btn">Back to Dashboard</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 CDS MedEase. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Dynamic navbar update (reusing logic from index.js/FDoctors.js)
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem('token');
+            const userRole = localStorage.getItem('userRole');
+            const authButtonsDiv = document.getElementById('auth-buttons');
+            const mainNav = document.getElementById('main-nav');
+
+            function updateUI() {
+                const existingPatientDashboardLink = mainNav.querySelector('a[href="patient_dashboard.html"]');
+                if (existingPatientDashboardLink) existingPatientDashboardLink.remove();
+                const existingDoctorDashboardLink = mainNav.querySelector('a[href="doctor_dashboard.html"]');
+                if (existingDoctorDashboardLink) existingDoctorDashboardLink.remove();
+                const existingBookAppointmentsLink = mainNav.querySelector('a[href="FDoctors.html"]');
+                if (existingBookAppointmentsLink && existingBookAppointmentsLink.textContent === 'Book Appointments') {
+                    existingBookAppointmentsLink.remove();
+                }
+
+                if (!token || !userRole) {
+                    authButtonsDiv.innerHTML = `
+                        <a href="login.html" class="sign-in-button">
+                            <button class="sign-in">Sign In</button>
+                        </a>
+                        <a href="register.html" class="register-button">
+                            <button class="register">Register</button>
+                        </a>
+                    `;
+                    const bookAppointmentsLink = document.createElement('a');
+                    bookAppointmentsLink.href = 'FDoctors.html';
+                    bookAppointmentsLink.textContent = 'Book Appointments';
+                    const findDoctorsLink = mainNav.querySelector('a[href="FDoctors.html"]');
+                    if (findDoctorsLink) {
+                        mainNav.insertBefore(bookAppointmentsLink, findDoctorsLink.nextSibling);
+                    } else {
+                        mainNav.appendChild(bookAppointmentsLink);
+                    }
+                } else {
+                    authButtonsDiv.innerHTML = `
+                        <button class="logout-btn">Logout</button>
+                    `;
+                    document.querySelector('.logout-btn').addEventListener('click', () => {
+                        localStorage.removeItem('token');
+                        localStorage.removeItem('userRole');
+                        localStorage.removeItem('userId');
+                        localStorage.removeItem('userName');
+                        localStorage.removeItem('userEmail');
+                        localStorage.removeItem('userSpecialty');
+                        localStorage.removeItem('userHospital');
+                        localStorage.removeItem('userPrice');
+                        alert('You have been logged out.');
+                        window.location.href = 'login.html';
+                    });
+
+                    if (userRole === 'patient') {
+                        const patientDashboardLink = document.createElement('a');
+                        patientDashboardLink.href = 'patient_dashboard.html';
+                        patientDashboardLink.textContent = 'My Dashboard';
+                        const findDoctorsLink = mainNav.querySelector('a[href="FDoctors.html"]');
+                        if (findDoctorsLink) {
+                            mainNav.insertBefore(patientDashboardLink, findDoctorsLink.nextSibling);
+                        } else {
+                            mainNav.appendChild(patientDashboardLink);
+                        }
+                    } else if (userRole === 'doctor') {
+                        const doctorDashboardLink = document.createElement('a');
+                        doctorDashboardLink.href = 'doctor_dashboard.html';
+                        doctorDashboardLink.textContent = 'My Dashboard';
+                        const findDoctorsLink = mainNav.querySelector('a[href="FDoctors.html"]');
+                        if (findDoctorsLink) {
+                            mainNav.insertBefore(doctorDashboardLink, findDoctorsLink.nextSibling);
+                        } else {
+                            mainNav.appendChild(doctorDashboardLink);
+                        }
+                    }
+                }
+            }
+            updateUI();
+        });
+    </script>
+    <script src="pay_now.js"></script>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js">
+      
+    </script>
+</body>
+</html>
